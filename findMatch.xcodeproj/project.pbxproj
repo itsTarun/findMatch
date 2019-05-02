@@ -18,6 +18,7 @@
 		F80A10FC227B587A00E7A1FB /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A10FB227B587A00E7A1FB /* Extensions+UIView.swift */; };
 		F80A1101227B5E5200E7A1FB /* HomeBottomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A1100227B5E5200E7A1FB /* HomeBottomStackView.swift */; };
 		F80A1104227B63BA00E7A1FB /* HomeTopStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A1103227B63BA00E7A1FB /* HomeTopStackView.swift */; };
+		F80A1106227B6A5200E7A1FB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A1105227B6A5200E7A1FB /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		F80A10FB227B587A00E7A1FB /* Extensions+UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
 		F80A1100227B5E5200E7A1FB /* HomeBottomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomStackView.swift; sourceTree = "<group>"; };
 		F80A1103227B63BA00E7A1FB /* HomeTopStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopStackView.swift; sourceTree = "<group>"; };
+		F80A1105227B6A5200E7A1FB /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				F80A10CC227B563400E7A1FB /* ViewController.swift */,
 				F80A1100227B5E5200E7A1FB /* HomeBottomStackView.swift */,
 				F80A1103227B63BA00E7A1FB /* HomeTopStackView.swift */,
+				F80A1105227B6A5200E7A1FB /* CardView.swift */,
 			);
 			path = findMatch;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F80A1106227B6A5200E7A1FB /* CardView.swift in Sources */,
 				F80A1104227B63BA00E7A1FB /* HomeTopStackView.swift in Sources */,
 				F80A1101227B5E5200E7A1FB /* HomeBottomStackView.swift in Sources */,
 				F80A10CD227B563400E7A1FB /* ViewController.swift in Sources */,
