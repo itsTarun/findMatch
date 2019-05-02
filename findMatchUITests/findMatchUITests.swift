@@ -1,10 +1,7 @@
 //
 //  findMatchUITests.swift
 //  findMatchUITests
-//
-//  Created by Tarun Sharma on 5/2/19.
-//  Copyright © 2019 Tarun Sharma. All rights reserved.
-//
+
 
 import XCTest
 

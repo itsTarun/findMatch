@@ -20,20 +20,23 @@ class HomeBottomStackView: UIStackView {
 extension HomeBottomStackView {
     
     fileprivate func setupView() {
+        
         distribution = .fillEqually
-        heightAnchor.constraint(equalToConstant: 120).isActive = true
+        heightAnchor.constraint(equalToConstant: 110).isActive = true
         
         // bottom row of buttons
-        let bottomSubViews = [UIColor.red,
-                              UIColor.green,
-                              UIColor.blue,
-                              UIColor.purple,
-                              UIColor.black].map
-            { (color) -> UIView in
-                let v = UIView()
-                v.backgroundColor = color
-                return v
+        
+        let bottomSubViews = [#imageLiteral(resourceName: "refresh_circle"),#imageLiteral(resourceName: "dismiss_circle"),#imageLiteral(resourceName: "super_like_circle"),#imageLiteral(resourceName: "like_circle"),#imageLiteral(resourceName: "boost_circle")].map
+        { (img) -> UIView in
+            
+            let button = UIButton(type: UIButton.ButtonType.system)
+            
+            button.setImage(img.withRenderingMode(.alwaysOriginal), for: UIControl.State.normal)
+            
+            return button
         }
+        
+        
         
         bottomSubViews.forEach { (view) in
             addArrangedSubview(view)
