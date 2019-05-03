@@ -24,7 +24,6 @@
 #include <grpcpp/security/credentials.h>
 #include <grpcpp/support/config.h>
 
-#include "src/core/lib/security/credentials/credentials.h"
 #include "src/cpp/server/thread_pool_interface.h"
 
 namespace grpc {
@@ -32,9 +31,7 @@ namespace grpc {
 class SecureChannelCredentials final : public ChannelCredentials {
  public:
   explicit SecureChannelCredentials(grpc_channel_credentials* c_creds);
-  ~SecureChannelCredentials() {
-    if (c_creds_ != nullptr) c_creds_->Unref();
-  }
+  ~SecureChannelCredentials() { grpc_channel_credentials_release(c_creds_); }
   grpc_channel_credentials* GetRawCreds() { return c_creds_; }
 
   std::shared_ptr<grpc::Channel> CreateChannel(
@@ -54,9 +51,7 @@ class SecureChannelCredentials final : public ChannelCredentials {
 class SecureCallCredentials final : public CallCredentials {
  public:
   explicit SecureCallCredentials(grpc_call_credentials* c_creds);
-  ~SecureCallCredentials() {
-    if (c_creds_ != nullptr) c_creds_->Unref();
-  }
+  ~SecureCallCredentials() { grpc_call_credentials_release(c_creds_); }
   grpc_call_credentials* GetRawCreds() { return c_creds_; }
 
   bool ApplyToCall(grpc_call* call) override;

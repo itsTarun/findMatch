@@ -159,7 +159,6 @@
 			children = (
 				F80A10CC227B563400E7A1FB /* HomeViewController.swift */,
 				841D1AF5227C49B4006C7CEE /* RegistrationViewController.swift */,
-				841D1AF9227C5FF7006C7CEE /* RegistrationViewModel.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -176,6 +175,7 @@
 		841D1AF0227C1FD8006C7CEE /* View Model */ = {
 			isa = PBXGroup;
 			children = (
+				841D1AF9227C5FF7006C7CEE /* RegistrationViewModel.swift */,
 				841D1AF1227C1FE8006C7CEE /* CardViewModel.swift */,
 			);
 			path = "View Model";
@@ -197,7 +197,6 @@
 		F80A10BE227B563400E7A1FB = {
 			isa = PBXGroup;
 			children = (
-				845631AB227C6CFD005798FC /* GoogleService-Info.plist */,
 				F80A10C9227B563400E7A1FB /* findMatch */,
 				F80A10E1227B563600E7A1FB /* findMatchTests */,
 				F80A10EC227B563700E7A1FB /* findMatchUITests */,
@@ -225,8 +224,9 @@
 				841D1AED227C1B85006C7CEE /* Model */,
 				841D1AE9227C1B3C006C7CEE /* Views */,
 				841D1AEC227C1B74006C7CEE /* Controller */,
-				F80A10D9227B563600E7A1FB /* Info.plist */,
 				841D1AEA227C1B52006C7CEE /* application */,
+				F80A10D9227B563600E7A1FB /* Info.plist */,
+				845631AB227C6CFD005798FC /* GoogleService-Info.plist */,
 			);
 			path = findMatch;
 			sourceTree = "<group>";
@@ -396,11 +396,8 @@
 				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -414,11 +411,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);

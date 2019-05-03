@@ -21,6 +21,7 @@
 
 #include <grpc/impl/codegen/connectivity_state.h>
 #include <grpcpp/impl/codegen/call.h>
+#include <grpcpp/impl/codegen/client_context.h>
 #include <grpcpp/impl/codegen/status.h>
 #include <grpcpp/impl/codegen/time.h>
 
@@ -52,12 +53,6 @@ template <class W, class R>
 class ClientAsyncReaderWriterFactory;
 template <class R>
 class ClientAsyncResponseReaderFactory;
-template <class W, class R>
-class ClientCallbackReaderWriterFactory;
-template <class R>
-class ClientCallbackReaderFactory;
-template <class W>
-class ClientCallbackWriterFactory;
 class InterceptedChannel;
 }  // namespace internal
 
@@ -111,12 +106,6 @@ class ChannelInterface {
   friend class ::grpc::internal::ClientAsyncReaderWriterFactory;
   template <class R>
   friend class ::grpc::internal::ClientAsyncResponseReaderFactory;
-  template <class W, class R>
-  friend class ::grpc::internal::ClientCallbackReaderWriterFactory;
-  template <class R>
-  friend class ::grpc::internal::ClientCallbackReaderFactory;
-  template <class W>
-  friend class ::grpc::internal::ClientCallbackWriterFactory;
   template <class InputMessage, class OutputMessage>
   friend class ::grpc::internal::BlockingUnaryCallImpl;
   template <class InputMessage, class OutputMessage>

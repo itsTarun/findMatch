@@ -31,6 +31,7 @@
 
 #include "src/core/lib/iomgr/error.h"
 #include "src/core/lib/iomgr/iomgr_custom.h"
+#include "src/core/lib/iomgr/network_status_tracker.h"
 #include "src/core/lib/iomgr/resource_quota.h"
 #include "src/core/lib/iomgr/tcp_client.h"
 #include "src/core/lib/iomgr/tcp_custom.h"
@@ -308,6 +309,7 @@ static void custom_close_callback(grpc_custom_socket* socket) {
 }
 
 static void endpoint_destroy(grpc_endpoint* ep) {
+  grpc_network_status_unregister_endpoint(ep);
   custom_tcp_endpoint* tcp = (custom_tcp_endpoint*)ep;
   grpc_custom_socket_vtable->close(tcp->socket, custom_close_callback);
 }
@@ -324,8 +326,6 @@ static grpc_resource_user* endpoint_get_resource_user(grpc_endpoint* ep) {
 
 static int endpoint_get_fd(grpc_endpoint* ep) { return -1; }
 
-static bool endpoint_can_track_err(grpc_endpoint* ep) { return false; }
-
 static grpc_endpoint_vtable vtable = {endpoint_read,
                                       endpoint_write,
                                       endpoint_add_to_pollset,
@@ -335,8 +335,7 @@ static grpc_endpoint_vtable vtable = {endpoint_read,
                                       endpoint_destroy,
                                       endpoint_get_resource_user,
                                       endpoint_get_peer,
-                                      endpoint_get_fd,
-                                      endpoint_can_track_err};
+                                      endpoint_get_fd};
 
 grpc_endpoint* custom_tcp_endpoint_create(grpc_custom_socket* socket,
                                           grpc_resource_quota* resource_quota,
@@ -359,6 +358,8 @@ grpc_endpoint* custom_tcp_endpoint_create(grpc_custom_socket* socket,
   tcp->resource_user = grpc_resource_user_create(resource_quota, peer_string);
   grpc_resource_user_slice_allocator_init(
       &tcp->slice_allocator, tcp->resource_user, tcp_read_allocation_done, tcp);
+  /* Tell network status tracking code about the new endpoint */
+  grpc_network_status_register_endpoint(&tcp->base);
 
   return &tcp->base;
 }

@@ -70,13 +70,13 @@ typedef struct grpc_http_request {
 /* A response */
 typedef struct grpc_http_response {
   /* HTTP status code */
-  int status = 0;
+  int status;
   /* Headers: count and key/values */
-  size_t hdr_count = 0;
-  grpc_http_header* hdrs = nullptr;
+  size_t hdr_count;
+  grpc_http_header* hdrs;
   /* Body: length and contents; contents are NOT null-terminated */
-  size_t body_length = 0;
-  char* body = nullptr;
+  size_t body_length;
+  char* body;
 } grpc_http_response;
 
 typedef struct {

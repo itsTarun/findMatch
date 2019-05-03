@@ -120,14 +120,13 @@ class GrpcPolledFdWindows : public GrpcPolledFd {
                     nullptr, &flags, (sockaddr*)recv_from_source_addr_,
                     &recv_from_source_addr_len_,
                     &winsocket_->read_info.overlapped, nullptr)) {
-      int wsa_last_error = WSAGetLastError();
-      char* msg = gpr_format_message(wsa_last_error);
+      char* msg = gpr_format_message(WSAGetLastError());
       grpc_error* error = GRPC_ERROR_CREATE_FROM_COPIED_STRING(msg);
       GRPC_CARES_TRACE_LOG(
           "RegisterForOnReadableLocked: WSARecvFrom error:|%s|. fd:|%s|", msg,
           GetName());
       gpr_free(msg);
-      if (wsa_last_error != WSA_IO_PENDING) {
+      if (WSAGetLastError() != WSA_IO_PENDING) {
         ScheduleAndNullReadClosure(error);
         return;
       }
@@ -230,13 +229,12 @@ class GrpcPolledFdWindows : public GrpcPolledFd {
     ares_ssize_t total_sent;
     DWORD bytes_sent = 0;
     if (SendWriteBuf(&bytes_sent, nullptr) != 0) {
-      int wsa_last_error = WSAGetLastError();
-      char* msg = gpr_format_message(wsa_last_error);
+      char* msg = gpr_format_message(WSAGetLastError());
       GRPC_CARES_TRACE_LOG(
           "TrySendWriteBufSyncNonBlocking: SendWriteBuf error:|%s|. fd:|%s|",
           msg, GetName());
       gpr_free(msg);
-      if (wsa_last_error == WSA_IO_PENDING) {
+      if (WSAGetLastError() == WSA_IO_PENDING) {
         WSASetLastError(WSAEWOULDBLOCK);
         write_state_ = WRITE_REQUESTED;
       }
@@ -286,10 +284,9 @@ class GrpcPolledFdWindows : public GrpcPolledFd {
     int out =
         WSAConnect(s, target, target_len, nullptr, nullptr, nullptr, nullptr);
     if (out != 0) {
-      int wsa_last_error = WSAGetLastError();
-      char* msg = gpr_format_message(wsa_last_error);
+      char* msg = gpr_format_message(WSAGetLastError());
       GRPC_CARES_TRACE_LOG("Connect error code:|%d|, msg:|%s|. fd:|%s|",
-                           wsa_last_error, msg, GetName());
+                           WSAGetLastError(), msg, GetName());
       gpr_free(msg);
       // c-ares expects a posix-style connect API
       out = -1;

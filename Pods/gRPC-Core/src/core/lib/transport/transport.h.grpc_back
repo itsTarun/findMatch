@@ -129,8 +129,7 @@ struct grpc_transport_stream_op_batch {
         recv_initial_metadata(false),
         recv_message(false),
         recv_trailing_metadata(false),
-        cancel_stream(false),
-        is_traced(false) {}
+        cancel_stream(false) {}
 
   /** Should be scheduled when all of the non-recv operations in the batch
       are complete.
@@ -167,9 +166,6 @@ struct grpc_transport_stream_op_batch {
 
   /** Cancel this stream with the provided error */
   bool cancel_stream : 1;
-
-  /** Is this stream traced */
-  bool is_traced : 1;
 
   /***************************************************************************
    * remaining fields are initialized and used at the discretion of the

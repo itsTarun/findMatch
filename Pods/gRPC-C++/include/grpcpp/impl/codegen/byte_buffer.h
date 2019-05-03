@@ -45,10 +45,8 @@ template <class ServiceType, class RequestType, class ResponseType>
 class RpcMethodHandler;
 template <class ServiceType, class RequestType, class ResponseType>
 class ServerStreamingHandler;
-template <class RequestType, class ResponseType>
+template <class ServiceType, class RequestType, class ResponseType>
 class CallbackUnaryHandler;
-template <class RequestType, class ResponseType>
-class CallbackServerStreamingHandler;
 template <StatusCode code>
 class ErrorMethodHandler;
 template <class R>
@@ -93,9 +91,7 @@ class ByteBuffer final {
   }
 
   /// Constuct a byte buffer by referencing elements of existing buffer
-  /// \a buf. Wrapper of core function grpc_byte_buffer_copy . This is not
-  /// a deep copy; it is just a referencing. As a result, its performance is
-  /// size-independent.
+  /// \a buf. Wrapper of core function grpc_byte_buffer_copy
   ByteBuffer(const ByteBuffer& buf);
 
   ~ByteBuffer() {
@@ -104,9 +100,6 @@ class ByteBuffer final {
     }
   }
 
-  /// Wrapper of core function grpc_byte_buffer_copy . This is not
-  /// a deep copy; it is just a referencing. As a result, its performance is
-  /// size-independent.
   ByteBuffer& operator=(const ByteBuffer&);
 
   /// Dump (read) the buffer contents into \a slices.
@@ -122,9 +115,7 @@ class ByteBuffer final {
 
   /// Make a duplicate copy of the internals of this byte
   /// buffer so that we have our own owned version of it.
-  /// bbuf.Duplicate(); is equivalent to bbuf=bbuf; but is actually readable.
-  /// This is not a deep copy; it is a referencing and its performance
-  /// is size-independent.
+  /// bbuf.Duplicate(); is equivalent to bbuf=bbuf; but is actually readable
   void Duplicate() {
     buffer_ = g_core_codegen_interface->grpc_byte_buffer_copy(buffer_);
   }
@@ -165,10 +156,8 @@ class ByteBuffer final {
   friend class internal::RpcMethodHandler;
   template <class ServiceType, class RequestType, class ResponseType>
   friend class internal::ServerStreamingHandler;
-  template <class RequestType, class ResponseType>
+  template <class ServiceType, class RequestType, class ResponseType>
   friend class internal::CallbackUnaryHandler;
-  template <class RequestType, class ResponseType>
-  friend class ::grpc::internal::CallbackServerStreamingHandler;
   template <StatusCode code>
   friend class internal::ErrorMethodHandler;
   template <class R>
