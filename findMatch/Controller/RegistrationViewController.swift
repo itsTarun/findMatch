@@ -12,11 +12,12 @@ class RegistrationViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 32, weight: .heavy)
         button.backgroundColor = .white
         button.setTitleColor(.black, for: .normal)
-        button.heightAnchor.constraint(equalToConstant: 275).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 250).isActive = true
         button.layer.cornerRadius = 16
         button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         button.imageView?.contentMode = .scaleAspectFill
         button.imageView?.clipsToBounds = true
+        
         return button
     }()
     
@@ -87,7 +88,7 @@ class RegistrationViewController: UIViewController {
             ])
         sv.axis = .vertical
         sv.distribution = .fillEqually
-        sv.spacing = 8
+        sv.spacing = 10
         return sv
     }()
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -136,62 +137,57 @@ class RegistrationViewController: UIViewController {
 extension RegistrationViewController {
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
+    fileprivate func setupRegistrationViewModel() {
+        
+        registrationViewModel.bindableIsFormValid.bind { [unowned self]   (isFormValid) in
+            
+            guard let isFormValid = isFormValid else { return }
+            
+            self.registerButton.isEnabled = isFormValid
+            
+            if isFormValid {
+                
+                self.registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
+                self.registerButton.setTitleColor(.white, for: .normal)
+                
+            }else {
+                
+                self.registerButton.setTitleColor(.gray, for: .disabled)
+                self.registerButton.backgroundColor = .lightGray
+                
+            }
+        }
+        
+        registrationViewModel.bindableImage.bind {  [unowned self] (img) in
+            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        
+        registrationViewModel.bindableIsRegistering.bind { [unowned self] (isRegistering) in
+            guard let isRegistering = isRegistering else { return }
+            if isRegistering {
+                self.registeringHUD.textLabel.text = "Registering.."
+                self.registeringHUD.show(in: self.view)
+            } else {
+                self.registeringHUD.dismiss()
+            }
+        }
+        
+    } //---------------------------------------------------------------------------------------------------------------------------------------------
     @objc fileprivate func handleRegister() {
         
         self.handleTapDismiss()
         
-        guard let email = emailTextField.text ,
-            let password = passwordTextField.text
-            else { return }
+        registrationViewModel.bindableIsRegistering.value = true
         
-        registeringHUD.textLabel.text = "Register"
-        registeringHUD.show(in: view)
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (response, error) in
-            
-            if let err = error {
-                self.showHUDWithError(err)
+        registrationViewModel.performRegistration { [weak self] (err) in
+            if let error = err {
+                self?.showHUDWithError(error)
                 return
             }
             
+            self?.registrationViewModel.bindableIsRegistering.value = false
             
-            print("\n\nSuccessfully registered user: ", response?.user.uid ?? "" ,"\n\n")
-            
-            // only upload images to firebase storage once you are authorized.
-            let fileName = UUID().uuidString
-            
-            let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
-            
-            if let imageData = self.registrationViewModel.bindableImage.value?.jpegData(compressionQuality: 0.75) {
-                
-                ref.putData(imageData, metadata: nil, completion: { (_, err) in
-                    
-                    if let error = err {
-                        self.showHUDWithError(error)
-                        return
-                    }
-                    
-                    print("\n\nFinished uploading image to storage\n\n")
-                    
-                    ref.downloadURL(completion: { (url, err) in
-                        
-                        if let error = err {
-                            self.showHUDWithError(error)
-                            return
-                        }
-                        
-                        print("\n\nDownload url of our image - \(url?.absoluteString ?? "")\n\n")
-                        
-                        // store the download url into firestore next lesson
-                        
-                        self.registeringHUD.dismiss()
-                    })
-                    
-                })
-                
-            }
-            
-            
+            // finished registering user
         }
         
     }
@@ -256,41 +252,14 @@ extension RegistrationViewController {
         hud.dismiss(afterDelay: 3.4)
     }
     
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    fileprivate func setupRegistrationViewModel() {
-        
-        registrationViewModel.bindableIsFormValid.bind { [unowned self]   (isFormValid) in
-            
-            guard let isFormValid = isFormValid else { return }
-            
-            self.registerButton.isEnabled = isFormValid
-            
-            if isFormValid {
-                
-                self.registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
-                self.registerButton.setTitleColor(.white, for: .normal)
-                
-            }else {
-                
-                self.registerButton.setTitleColor(.gray, for: .disabled)
-                self.registerButton.backgroundColor = .lightGray
-                
-            }
-        }
-        
-        registrationViewModel.bindableImage.bind {  [unowned self] (img) in
-            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
-        }
-        
-    }
+
     //---------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate func setupLayout() {
         view.addSubview(overallStackView)
         
         overallStackView.axis = .vertical
         
-        selectPhotoButton.widthAnchor.constraint(equalToConstant: 275).isActive = true
-        overallStackView.spacing = 8
+        overallStackView.spacing = 16
         overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
         overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
@@ -299,8 +268,8 @@ extension RegistrationViewController {
     //---------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate func setupGradientLayer() {
         
-        let topColor = #colorLiteral(red: 0.9921568627, green: 0.3568627451, blue: 0.3725490196, alpha: 1)
-        let bottomColor = #colorLiteral(red: 0.8980392157, green: 0, blue: 0.4470588235, alpha: 1)
+        let topColor = #colorLiteral(red: 0.2352941176, green: 0.231372549, blue: 0.2470588235, alpha: 1)
+        let bottomColor = #colorLiteral(red: 0.3764705882, green: 0.3607843137, blue: 0.2352941176, alpha: 1)
         // make sure to user cgColor
         gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
         gradientLayer.locations = [0, 1]
