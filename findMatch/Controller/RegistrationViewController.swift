@@ -14,6 +14,9 @@ class RegistrationViewController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 275).isActive = true
         button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.imageView?.clipsToBounds = true
         return button
     }()
     
@@ -70,6 +73,8 @@ class RegistrationViewController: UIViewController {
     
     let registrationViewModel = RegistrationViewModel()
     
+    let imagePickerController = UIImagePickerController()
+    
     //---------------------------------------------------------------------------------------------------------------------------------------------
     lazy var verticalStackView: UIStackView = {
         let sv = UIStackView(arrangedSubviews: [
@@ -120,7 +125,7 @@ class RegistrationViewController: UIViewController {
         }
         
     }
-    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     
 }
 
@@ -144,6 +149,12 @@ extension RegistrationViewController {
             print("Successfully registered user: ", response?.user.uid ?? "")
         }
         
+    }
+    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    @objc fileprivate func handleSelectPhoto() {
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true)
     }
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -185,7 +196,7 @@ extension RegistrationViewController {
         let difference = keyboardFrame.height - bottomSpace
         self.view.transform = CGAffineTransform(translationX: 0, y: -difference - 8)
     }
-    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
 }
 
 
@@ -202,7 +213,9 @@ extension RegistrationViewController {
     //---------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate func setupRegistrationViewModel() {
         
-        registrationViewModel.isFormValidObserver = { (isFormValid) in
+        registrationViewModel.bindableIsFormValid.bind { [unowned self]   (isFormValid) in
+            
+            guard let isFormValid = isFormValid else { return }
             
             self.registerButton.isEnabled = isFormValid
             
@@ -217,6 +230,10 @@ extension RegistrationViewController {
                 self.registerButton.backgroundColor = .lightGray
                 
             }
+        }
+        
+        registrationViewModel.bindableImage.bind {  [unowned self] (img) in
+            self.selectPhotoButton.setImage(img?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
         
     }
@@ -254,5 +271,26 @@ extension RegistrationViewController {
     fileprivate func setupTapGesture() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss)))
     }
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+}
+
+
+extension RegistrationViewController : UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let image = info[.originalImage] as? UIImage
+        
+        registrationViewModel.bindableImage.value = image
+        
+        dismiss(animated: true)
+        
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------------
 }

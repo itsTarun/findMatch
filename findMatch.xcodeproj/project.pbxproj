@@ -15,6 +15,7 @@
 		841D1AF8227C4EBD006C7CEE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D1AF7227C4EBD006C7CEE /* CustomTextField.swift */; };
 		841D1AFA227C5FF7006C7CEE /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D1AF9227C5FF7006C7CEE /* RegistrationViewModel.swift */; };
 		845631AC227C6CFE005798FC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 845631AB227C6CFD005798FC /* GoogleService-Info.plist */; };
+		845631AE227C7D1B005798FC /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845631AD227C7D1B005798FC /* Bindable.swift */; };
 		A669DEF0C842591012DA7113 /* Pods_findMatch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7250EC3E7FAB61B49B2FEDE6 /* Pods_findMatch.framework */; };
 		CDFDAEE7DCE516254DCE523E /* Pods_findMatchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEE9C96C1024C5D9EA96FF8 /* Pods_findMatchTests.framework */; };
 		F80A10CB227B563400E7A1FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A10CA227B563400E7A1FB /* AppDelegate.swift */; };
@@ -61,6 +62,7 @@
 		841D1AF7227C4EBD006C7CEE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		841D1AF9227C5FF7006C7CEE /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		845631AB227C6CFD005798FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		845631AD227C7D1B005798FC /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		8AE8BBDFE0B501DAF0525FE0 /* Pods_findMatchUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_findMatchUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D965C83F5F2E97F2DE9A1FF4 /* Pods-findMatchUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findMatchUITests.debug.xcconfig"; path = "Target Support Files/Pods-findMatchUITests/Pods-findMatchUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E52F6698620E0174282F176D /* Pods-findMatchTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-findMatchTests.release.xcconfig"; path = "Target Support Files/Pods-findMatchTests/Pods-findMatchTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			children = (
 				F80A10CC227B563400E7A1FB /* HomeViewController.swift */,
 				841D1AF5227C49B4006C7CEE /* RegistrationViewController.swift */,
+				845631AD227C7D1B005798FC /* Bindable.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				F80A10CD227B563400E7A1FB /* HomeViewController.swift in Sources */,
 				841D1AEF227C1B98006C7CEE /* User.swift in Sources */,
 				F80A10CB227B563400E7A1FB /* AppDelegate.swift in Sources */,
+				845631AE227C7D1B005798FC /* Bindable.swift in Sources */,
 				841D1AF8227C4EBD006C7CEE /* CustomTextField.swift in Sources */,
 				841D1AFA227C5FF7006C7CEE /* RegistrationViewModel.swift in Sources */,
 				F80A10FC227B587A00E7A1FB /* Extensions+UIView.swift in Sources */,

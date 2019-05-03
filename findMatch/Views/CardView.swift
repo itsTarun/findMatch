@@ -5,7 +5,7 @@
 import UIKit
 
 class CardView: UIView {
-    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
     
     fileprivate let informationLabel = UILabel()
@@ -19,7 +19,7 @@ class CardView: UIView {
     fileprivate let threshold: CGFloat = 80
     
     fileprivate var imageIndex = 0
-    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     var cardViewModel: CardViewModel! {
         didSet {
             
@@ -43,6 +43,7 @@ class CardView: UIView {
         }
     }
     
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -68,7 +69,7 @@ class CardView: UIView {
 
 extension CardView {
     
-    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate func setupLayout() {
         
         layer.cornerRadius = 10
@@ -100,6 +101,7 @@ extension CardView {
         
     }
     
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate func setupBarsStackView() {
         addSubview(barsStackView)
         
@@ -110,6 +112,7 @@ extension CardView {
         
     }
     
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate func setupGradientLayer()
     {
         gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
@@ -119,6 +122,7 @@ extension CardView {
         layer.addSublayer(gradientLayer)
     }
     
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate func setupImageIndexObserver()
     {
         cardViewModel.imageIndexObserver = { [weak self] (imageIndex ,image) in
@@ -134,12 +138,12 @@ extension CardView {
             self.barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
         }
     }
-    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
 }
 
 
 extension CardView {
-    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .began:
@@ -154,7 +158,7 @@ extension CardView {
             ()
         }
     }
-    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     @objc fileprivate func handleTap(gesture: UITapGestureRecognizer) {
         
         let tapLocation = gesture.location(in: nil)
@@ -168,12 +172,12 @@ extension CardView {
         }
 
     }
-    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
 }
 
 
 extension CardView {
-    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate func handleChanged(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: nil)
         // rotation
@@ -184,7 +188,7 @@ extension CardView {
         let rotationalTransformation = CGAffineTransform(rotationAngle: angle)
         self.transform = rotationalTransformation.translatedBy(x: translation.x, y: translation.y)
     }
-    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate func handleEnded(gesture: UIPanGestureRecognizer) {
         
         let translationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
@@ -206,5 +210,5 @@ extension CardView {
         }
         
     }
-    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
 }

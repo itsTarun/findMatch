@@ -2,20 +2,22 @@
 //  RegistrationViewModel.swift
 //  findMatch
 
-import Foundation
+import UIKit
 
 class RegistrationViewModel {
     
-    var fullName  : String? { didSet { checkFormValidity() } }
-    var email     : String? { didSet { checkFormValidity() } }
-    var password  : String? { didSet { checkFormValidity() } }
+    var bindableImage = Bindable<UIImage>()
     
-    var isFormValidObserver: ( (Bool) -> () )?
+    var fullName  : String?   { didSet { checkFormValidity() } }
+    var email     : String?   { didSet { checkFormValidity() } }
+    var password  : String?   { didSet { checkFormValidity() } }
+    
+    var bindableIsFormValid = Bindable<Bool>()
     
     fileprivate func checkFormValidity() {
         
         let isFormValid = (fullName?.isEmpty == false) && (email?.isEmpty == false) && (password?.isEmpty == false)
         
-        isFormValidObserver?(isFormValid)
+        bindableIsFormValid.value = isFormValid
     }
 }
