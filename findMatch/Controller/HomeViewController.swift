@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     let cardsDeckView = UIView()
     let buttonsStackView = HomeBottomStackView()
     
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
@@ -36,8 +37,6 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController {
     
-    // MARK:- Fileprivate
-    
     @objc fileprivate func handleSetting() {
         
         let registrationViewController = RegistrationViewController()
@@ -45,6 +44,7 @@ extension HomeViewController {
         present(registrationViewController, animated: true)
     }
     
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate func setupDummyCards() {
         
         cardViewModel.forEach { (cardVM) in
@@ -58,8 +58,7 @@ extension HomeViewController {
         }
     }
     
-    
-    
+    //---------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate func setupLayout() {
         let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, buttonsStackView])
         overallStackView.axis = .vertical
