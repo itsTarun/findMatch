@@ -2,7 +2,7 @@
 
 App Description :
     
-creating a fun and interactive Swipe and Match user interface. In today's day and age of dating applications, you're almost guaranteed to find this style of interaction.
+Creating a fun and interactive Swipe and Match user interface. In today's day and age of dating applications, you're almost guaranteed to find this style of interaction.
 
 I'll be starting from scratch by creating a brand new project. I'll tackle this project in the below steps:
 
