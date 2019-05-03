@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>783520612350-v7v5d18kt6ts4r3bfbbq952mrc8agm3f.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.783520612350-v7v5d18kt6ts4r3bfbbq952mrc8agm3f</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAlqEWO_8N5ufRLQDgKpDUFT7DP_aT17E4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>783520612350</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>edu.Self.findMatch</string>
+	<key>PROJECT_ID</key>
+	<string>findmatch-e50fa</string>
+	<key>STORAGE_BUCKET</key>
+	<string>findmatch-e50fa.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:783520612350:ios:a61b669736d3cc7d</string>
+	<key>DATABASE_URL</key>
+	<string>https://findmatch-e50fa.firebaseio.com</string>
+</dict>
+</plist>
