@@ -38,6 +38,8 @@ class CardView: UIView {
             }
             
             barsStackView.arrangedSubviews.first?.backgroundColor = .white
+            
+            setupImageIndexObserver()
         }
     }
     
@@ -117,6 +119,22 @@ extension CardView {
         layer.addSublayer(gradientLayer)
     }
     
+    fileprivate func setupImageIndexObserver()
+    {
+        cardViewModel.imageIndexObserver = { [weak self] (imageIndex ,image) in
+            
+            guard let self = self else { return }
+            
+            self.imageView.image = image
+            
+            self.barsStackView.arrangedSubviews.forEach { (view) in
+                view.backgroundColor = self.deSelectedColor
+            }
+            
+            self.barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
+        }
+    }
+    
 }
 
 
@@ -142,24 +160,13 @@ extension CardView {
         let tapLocation = gesture.location(in: nil)
         
         let shouldAdvanceNexPhoto = tapLocation.x > frame.width / 2 ? true : false
-        
+
         if shouldAdvanceNexPhoto {
-            imageIndex = min(imageIndex + 1, cardViewModel.imageNames.count - 1)
-            
+            cardViewModel.goToNextPhoto()
         } else {
-            imageIndex = max(0, imageIndex - 1)
+            cardViewModel.goToPreviousPhoto()
         }
-        
-        let imageName = cardViewModel.imageNames[imageIndex]
-        
-        imageView.image = UIImage(named: imageName)
-        
-        
-        barsStackView.arrangedSubviews.forEach { (view) in
-            view.backgroundColor = deSelectedColor
-        }
-        
-        barsStackView.arrangedSubviews[imageIndex].backgroundColor = .white
+
     }
     
 }
