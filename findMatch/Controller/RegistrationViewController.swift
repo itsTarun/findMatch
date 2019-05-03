@@ -124,7 +124,6 @@ class RegistrationViewController: UIViewController {
         setupRegistrationViewModel()
         
         view.addSubview(closeButton)
-        
         closeButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 20))
     }
     
