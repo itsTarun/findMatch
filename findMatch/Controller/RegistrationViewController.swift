@@ -83,43 +83,70 @@ class RegistrationViewController: UIViewController {
     }
     
     @objc fileprivate func handleKeyboardShow(notification: Notification) {
-        // how tall the keyboard actually is
+        // how to figure out how tall the keyboard actually is
         guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardFrame = value.cgRectValue
-        // print(keyboardFrame)
+        print(keyboardFrame)
         
-        // try to figure out how tall the gap is from the register button to the bottom of the screen
-        let bottomSpace = view.frame.height - stackView.frame.origin.y - stackView.frame.height
-        // print(bottomSpace)
+        // let's try to figure out how tall the gap is from the register button to the bottom of the screen
+        let bottomSpace = view.frame.height - overallStackView.frame.origin.y - overallStackView.frame.height
+        print(bottomSpace)
         
         let difference = keyboardFrame.height - bottomSpace
-        
         self.view.transform = CGAffineTransform(translationX: 0, y: -difference - 8)
+    }
+    
+    lazy var verticalStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [
+            fullNameTextField,
+            emailTextField,
+            passwordTextField,
+            registerButton
+            ])
+        sv.axis = .vertical
+        sv.distribution = .fillEqually
+        sv.spacing = 8
+        return sv
+    }()
+    
+    lazy var overallStackView = UIStackView(arrangedSubviews: [
+        selectPhotoButton,
+        verticalStackView
+        ])
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         
+        if self.traitCollection.verticalSizeClass == .compact {
+            overallStackView.axis = .horizontal
+        } else {
+            overallStackView.axis = .vertical
+        }
         
     }
     
-    lazy var stackView = UIStackView(arrangedSubviews: [
-        selectPhotoButton,
-        fullNameTextField,
-        emailTextField,
-        passwordTextField,
-        registerButton
-        ])
-    
     fileprivate func setupLayout() {
-        view.addSubview(stackView)
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        stackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
-        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        view.addSubview(overallStackView)
+        
+        overallStackView.axis = .vertical
+        
+        selectPhotoButton.widthAnchor.constraint(equalToConstant: 275).isActive = true
+        overallStackView.spacing = 8
+        overallStackView.anchor(top: nil, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 0, left: 50, bottom: 0, right: 50))
+        overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    let gradientLayer = CAGradientLayer()
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        gradientLayer.frame = view.bounds
     }
     
     fileprivate func setupGradientLayer() {
-        let gradientLayer = CAGradientLayer()
+        
         let topColor = #colorLiteral(red: 0.9921568627, green: 0.3568627451, blue: 0.3725490196, alpha: 1)
         let bottomColor = #colorLiteral(red: 0.8980392157, green: 0, blue: 0.4470588235, alpha: 1)
-        // make sure to cgColor
+        // make sure to user cgColor
         gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
         gradientLayer.locations = [0, 1]
         view.layer.addSublayer(gradientLayer)
