@@ -71,9 +71,11 @@ class RegistrationViewController: UIViewController {
     
     let gradientLayer = CAGradientLayer()
     
+    let imagePickerController = UIImagePickerController()
+    
     let registrationViewModel = RegistrationViewModel()
     
-    let imagePickerController = UIImagePickerController()
+    let registeringHUD = JGProgressHUD(style: .dark)
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
     lazy var verticalStackView: UIStackView = {
@@ -105,16 +107,13 @@ class RegistrationViewController: UIViewController {
         setupTapGesture()
         setupRegistrationViewModel()
     }
-    //---------------------------------------------------------------------------------------------------------------------------------------------
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self) // you'll have a retain cycle
-    }
+    
     //---------------------------------------------------------------------------------------------------------------------------------------------
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         gradientLayer.frame = view.bounds
     }
+    
     //---------------------------------------------------------------------------------------------------------------------------------------------
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         
@@ -125,12 +124,17 @@ class RegistrationViewController: UIViewController {
         }
         
     }
+    
     //---------------------------------------------------------------------------------------------------------------------------------------------
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
 }
 
 
 extension RegistrationViewController {
+    
     //---------------------------------------------------------------------------------------------------------------------------------------------
     @objc fileprivate func handleRegister() {
         
@@ -140,13 +144,54 @@ extension RegistrationViewController {
             let password = passwordTextField.text
             else { return }
         
+        registeringHUD.textLabel.text = "Register"
+        registeringHUD.show(in: view)
+        
         Auth.auth().createUser(withEmail: email, password: password) { (response, error) in
+            
             if let err = error {
-                print(err)
                 self.showHUDWithError(err)
                 return
             }
-            print("Successfully registered user: ", response?.user.uid ?? "")
+            
+            
+            print("\n\nSuccessfully registered user: ", response?.user.uid ?? "" ,"\n\n")
+            
+            // only upload images to firebase storage once you are authorized.
+            let fileName = UUID().uuidString
+            
+            let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
+            
+            if let imageData = self.registrationViewModel.bindableImage.value?.jpegData(compressionQuality: 0.75) {
+                
+                ref.putData(imageData, metadata: nil, completion: { (_, err) in
+                    
+                    if let error = err {
+                        self.showHUDWithError(error)
+                        return
+                    }
+                    
+                    print("\n\nFinished uploading image to storage\n\n")
+                    
+                    ref.downloadURL(completion: { (url, err) in
+                        
+                        if let error = err {
+                            self.showHUDWithError(error)
+                            return
+                        }
+                        
+                        print("\n\nDownload url of our image - \(url?.absoluteString ?? "")\n\n")
+                        
+                        // store the download url into firestore next lesson
+                        
+                        self.registeringHUD.dismiss()
+                    })
+                    
+                })
+                
+            }
+            
+            
         }
         
     }
@@ -187,11 +232,11 @@ extension RegistrationViewController {
         // how to figure out how tall the keyboard actually is
         guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardFrame = value.cgRectValue
-        print(keyboardFrame)
+        //print(keyboardFrame)
         
         // let's try to figure out how tall the gap is from the register button to the bottom of the screen
         let bottomSpace = view.frame.height - overallStackView.frame.origin.y - overallStackView.frame.height
-        print(bottomSpace)
+        //print(bottomSpace)
         
         let difference = keyboardFrame.height - bottomSpace
         self.view.transform = CGAffineTransform(translationX: 0, y: -difference - 8)
@@ -203,6 +248,7 @@ extension RegistrationViewController {
 extension RegistrationViewController {
     //---------------------------------------------------------------------------------------------------------------------------------------------
     fileprivate func showHUDWithError(_ error: Error) {
+        registeringHUD.dismiss()
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Failed registration"
         hud.detailTextLabel.text = error.localizedDescription
