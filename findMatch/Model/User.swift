@@ -12,6 +12,11 @@ struct User {
     let profession: String
     let imageName: String
     
+
+}
+
+extension User : ProducesCardViewModel {
+    
     func toCardViewModel() -> CardViewModel {
         
         let attributedText = NSMutableAttributedString(string: name, attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
@@ -22,4 +27,5 @@ struct User {
         return CardViewModel(imageName: imageName, attributedString: attributedText, textAlignment: .left)
         
     }
+    
 }

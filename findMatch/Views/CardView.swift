@@ -6,28 +6,27 @@ import UIKit
 
 class CardView: UIView {
     
-    let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
-    let informationLabel = UILabel()
+    var cardViewModel: CardViewModel! {
+        didSet {
+            
+            imageView.image = UIImage(named: cardViewModel.imageName)
+            informationLabel.attributedText = cardViewModel.attributedString
+            informationLabel.textAlignment = cardViewModel.textAlignment
+        }
+    }
+    
+    // encapsulation
+    fileprivate let imageView = UIImageView(image: #imageLiteral(resourceName: "lady5c"))
+    fileprivate let informationLabel = UILabel()
+    fileprivate let gradientLayer = CAGradientLayer()
+    
     // Configurations
     fileprivate let threshold: CGFloat = 80
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        // custom drawing code
-        layer.cornerRadius = 10
-        clipsToBounds = true
         
-        imageView.contentMode = .scaleAspectFill
-        addSubview(imageView)
-        imageView.fillSuperview()
-        
-        addSubview(informationLabel)
-        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
-        
-        informationLabel.text = "TEST NAME TEST NAME AGE"
-        informationLabel.textColor = .white
-        informationLabel.font = UIFont.systemFont(ofSize: 34, weight: .heavy)
-        informationLabel.numberOfLines = 0
+        setupLayout()
         
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGesture)
@@ -37,6 +36,10 @@ class CardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        gradientLayer.frame = self.frame
+    }
+    
 }
 
 
@@ -44,6 +47,10 @@ extension CardView {
     
     @objc fileprivate func handlePan(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
+        case .began:
+            superview?.subviews.forEach({ (subView) in
+                subView.layer.removeAllAnimations()
+            })
         case .changed:
             handleChanged(gesture)
         case .ended:
@@ -82,6 +89,41 @@ extension CardView {
             }
             //            self.frame = CGRect(x: 0, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
         }
+    }
+    
+    fileprivate func setupLayout() {
+        
+        layer.cornerRadius = 10
+        clipsToBounds = true
+        
+        imageView.contentMode = .scaleAspectFill
+        
+        // add imageView
+        
+        addSubview(imageView)
+        imageView.fillSuperview()
+        
+        // add gradient layer
+        
+        setupGradientLayer()
+        
+        // add informationLabel
+        
+        addSubview(informationLabel)
+        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 16, right: 16))
+        
+        informationLabel.textColor = .white
+        informationLabel.numberOfLines = 0
+        
+    }
+    
+    fileprivate func setupGradientLayer()
+    {
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        
+        gradientLayer.locations = [0.50, 1.1]
+        
+        layer.addSublayer(gradientLayer)
     }
     
 }

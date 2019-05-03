@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		841D1AEF227C1B98006C7CEE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D1AEE227C1B98006C7CEE /* User.swift */; };
 		841D1AF2227C1FE8006C7CEE /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D1AF1227C1FE8006C7CEE /* CardViewModel.swift */; };
+		841D1AF4227C246C006C7CEE /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D1AF3227C246C006C7CEE /* Advertiser.swift */; };
 		F80A10CB227B563400E7A1FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A10CA227B563400E7A1FB /* AppDelegate.swift */; };
 		F80A10CD227B563400E7A1FB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A10CC227B563400E7A1FB /* HomeViewController.swift */; };
 		F80A10D0227B563400E7A1FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F80A10CE227B563400E7A1FB /* Main.storyboard */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		841D1AEE227C1B98006C7CEE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		841D1AF1227C1FE8006C7CEE /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		841D1AF3227C246C006C7CEE /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		F80A10C7227B563400E7A1FB /* findMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = findMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80A10CA227B563400E7A1FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F80A10CC227B563400E7A1FB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				841D1AEE227C1B98006C7CEE /* User.swift */,
+				841D1AF3227C246C006C7CEE /* Advertiser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				841D1AF4227C246C006C7CEE /* Advertiser.swift in Sources */,
 				F80A1106227B6A5200E7A1FB /* CardView.swift in Sources */,
 				F80A1104227B63BA00E7A1FB /* HomeTopStackView.swift in Sources */,
 				F80A1101227B5E5200E7A1FB /* HomeBottomStackView.swift in Sources */,
