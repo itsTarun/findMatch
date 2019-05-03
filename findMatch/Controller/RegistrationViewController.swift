@@ -2,6 +2,8 @@ import UIKit
 import Firebase
 import JGProgressHUD
 
+// FIXME:- textField 1st character capital
+
 class RegistrationViewController: UIViewController {
     
     // UI Components
@@ -17,6 +19,19 @@ class RegistrationViewController: UIViewController {
         button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         button.imageView?.contentMode = .scaleAspectFill
         button.imageView?.clipsToBounds = true
+        
+        return button
+    }()
+    
+    let closeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Close", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 13, weight: .heavy)
+        button.backgroundColor = .clear
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 10
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.addTarget(self, action: #selector(handleClose), for: .touchUpInside)
         
         return button
     }()
@@ -107,6 +122,10 @@ class RegistrationViewController: UIViewController {
         setupNotificationObservers()
         setupTapGesture()
         setupRegistrationViewModel()
+        
+        view.addSubview(closeButton)
+        
+        closeButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 20))
     }
     
     //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -188,10 +207,14 @@ extension RegistrationViewController {
             self?.registrationViewModel.bindableIsRegistering.value = false
             
             // finished registering user
+            self?.dismiss(animated: true)
         }
         
     }
     
+    @objc fileprivate func handleClose() {
+        self.dismiss(animated: true)
+    }
     //---------------------------------------------------------------------------------------------------------------------------------------------
     @objc fileprivate func handleSelectPhoto() {
         imagePickerController.delegate = self
