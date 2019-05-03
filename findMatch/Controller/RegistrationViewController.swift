@@ -19,6 +19,7 @@ class RegistrationViewController: UIViewController {
         let tf = CustomTextField(padding: 24, height: 44)
         tf.placeholder = "Enter full name"
         tf.backgroundColor = .white
+        tf.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
         return tf
     }()
     let emailTextField: CustomTextField = {
@@ -26,6 +27,7 @@ class RegistrationViewController: UIViewController {
         tf.placeholder = "Enter email"
         tf.keyboardType = .emailAddress
         tf.backgroundColor = .white
+        tf.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
         return tf
     }()
     let passwordTextField: CustomTextField = {
@@ -33,6 +35,7 @@ class RegistrationViewController: UIViewController {
         tf.placeholder = "Enter password"
         tf.isSecureTextEntry = true
         tf.backgroundColor = .white
+        tf.addTarget(self, action: #selector(handleTextDidChange), for: .editingChanged)
         return tf
     }()
     
@@ -41,11 +44,24 @@ class RegistrationViewController: UIViewController {
         button.setTitle("Register", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
-        button.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
+        
+        button.backgroundColor = .lightGray
+        button.setTitleColor(.gray, for: .disabled)
+        button.isEnabled = false
+        
         button.heightAnchor.constraint(equalToConstant: 44).isActive = true
         button.layer.cornerRadius = 22
         return button
     }()
+    
+    let gradientLayer = CAGradientLayer()
+    
+    let registrationViewModel = RegistrationViewModel()
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        gradientLayer.frame = view.bounds
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +70,40 @@ class RegistrationViewController: UIViewController {
         setupLayout()
         setupNotificationObservers()
         setupTapGesture()
+        setupRegistrationViewModel()
+    }
+    
+    fileprivate func setupRegistrationViewModel() {
+        
+        registrationViewModel.isFormValidObserver = { (isFormValid) in
+            
+            self.registerButton.isEnabled = isFormValid
+            
+            if isFormValid {
+                
+                self.registerButton.backgroundColor = #colorLiteral(red: 0.8235294118, green: 0, blue: 0.3254901961, alpha: 1)
+                self.registerButton.setTitleColor(.white, for: .normal)
+                
+            }else {
+                
+                self.registerButton.setTitleColor(.gray, for: .disabled)
+                self.registerButton.backgroundColor = .lightGray
+                
+            }
+        }
+        
+    }
+    
+    @objc fileprivate func handleTextDidChange(textField: UITextField) {
+        
+        if textField == fullNameTextField {
+            registrationViewModel.fullName = textField.text
+        } else if textField == emailTextField {
+            registrationViewModel.email = textField.text
+        } else {
+            registrationViewModel.password = textField.text
+        }
+        
     }
     
     // MARK:- Private
@@ -135,12 +185,7 @@ class RegistrationViewController: UIViewController {
         overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
-    let gradientLayer = CAGradientLayer()
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        gradientLayer.frame = view.bounds
-    }
     
     fileprivate func setupGradientLayer() {
         
@@ -152,5 +197,6 @@ class RegistrationViewController: UIViewController {
         view.layer.addSublayer(gradientLayer)
         gradientLayer.frame = view.bounds
     }
+    
     
 }
