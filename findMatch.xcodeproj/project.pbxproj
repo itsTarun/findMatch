@@ -10,6 +10,8 @@
 		841D1AEF227C1B98006C7CEE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D1AEE227C1B98006C7CEE /* User.swift */; };
 		841D1AF2227C1FE8006C7CEE /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D1AF1227C1FE8006C7CEE /* CardViewModel.swift */; };
 		841D1AF4227C246C006C7CEE /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D1AF3227C246C006C7CEE /* Advertiser.swift */; };
+		841D1AF6227C49B4006C7CEE /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D1AF5227C49B4006C7CEE /* RegistrationViewController.swift */; };
+		841D1AF8227C4EBD006C7CEE /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D1AF7227C4EBD006C7CEE /* CustomTextField.swift */; };
 		F80A10CB227B563400E7A1FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A10CA227B563400E7A1FB /* AppDelegate.swift */; };
 		F80A10CD227B563400E7A1FB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A10CC227B563400E7A1FB /* HomeViewController.swift */; };
 		F80A10D0227B563400E7A1FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F80A10CE227B563400E7A1FB /* Main.storyboard */; };
@@ -45,6 +47,8 @@
 		841D1AEE227C1B98006C7CEE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		841D1AF1227C1FE8006C7CEE /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		841D1AF3227C246C006C7CEE /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		841D1AF5227C49B4006C7CEE /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		841D1AF7227C4EBD006C7CEE /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		F80A10C7227B563400E7A1FB /* findMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = findMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80A10CA227B563400E7A1FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F80A10CC227B563400E7A1FB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 				F80A1100227B5E5200E7A1FB /* HomeBottomStackView.swift */,
 				F80A1103227B63BA00E7A1FB /* HomeTopStackView.swift */,
 				F80A1105227B6A5200E7A1FB /* CardView.swift */,
+				841D1AF7227C4EBD006C7CEE /* CustomTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				F80A10CC227B563400E7A1FB /* HomeViewController.swift */,
+				841D1AF5227C49B4006C7CEE /* RegistrationViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -331,10 +337,12 @@
 				841D1AF4227C246C006C7CEE /* Advertiser.swift in Sources */,
 				F80A1106227B6A5200E7A1FB /* CardView.swift in Sources */,
 				F80A1104227B63BA00E7A1FB /* HomeTopStackView.swift in Sources */,
+				841D1AF6227C49B4006C7CEE /* RegistrationViewController.swift in Sources */,
 				F80A1101227B5E5200E7A1FB /* HomeBottomStackView.swift in Sources */,
 				F80A10CD227B563400E7A1FB /* HomeViewController.swift in Sources */,
 				841D1AEF227C1B98006C7CEE /* User.swift in Sources */,
 				F80A10CB227B563400E7A1FB /* AppDelegate.swift in Sources */,
+				841D1AF8227C4EBD006C7CEE /* CustomTextField.swift in Sources */,
 				F80A10FC227B587A00E7A1FB /* Extensions+UIView.swift in Sources */,
 				F80A10D3227B563400E7A1FB /* findMatch.xcdatamodeld in Sources */,
 				841D1AF2227C1FE8006C7CEE /* CardViewModel.swift in Sources */,
