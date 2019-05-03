@@ -20,7 +20,7 @@ extension Advertiser : ProducesCardViewModel {
         
         attributeString.append(NSAttributedString(string: "\n \(brandName)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .bold)]))
         
-        return CardViewModel(imageName: posterPhotoName, attributedString: attributeString, textAlignment: .center)
+        return CardViewModel(imageNames: [posterPhotoName], attributedString: attributeString, textAlignment: .center)
     }
     
 }
