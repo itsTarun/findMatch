@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841D1AEF227C1B98006C7CEE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D1AEE227C1B98006C7CEE /* User.swift */; };
 		F80A10CB227B563400E7A1FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A10CA227B563400E7A1FB /* AppDelegate.swift */; };
-		F80A10CD227B563400E7A1FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A10CC227B563400E7A1FB /* ViewController.swift */; };
+		F80A10CD227B563400E7A1FB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80A10CC227B563400E7A1FB /* HomeViewController.swift */; };
 		F80A10D0227B563400E7A1FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F80A10CE227B563400E7A1FB /* Main.storyboard */; };
 		F80A10D3227B563400E7A1FB /* findMatch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F80A10D1227B563400E7A1FB /* findMatch.xcdatamodeld */; };
 		F80A10D5227B563600E7A1FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F80A10D4227B563600E7A1FB /* Assets.xcassets */; };
@@ -39,9 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		841D1AEE227C1B98006C7CEE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F80A10C7227B563400E7A1FB /* findMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = findMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80A10CA227B563400E7A1FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F80A10CC227B563400E7A1FB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F80A10CC227B563400E7A1FB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F80A10CF227B563400E7A1FB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F80A10D2227B563400E7A1FB /* findMatch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = findMatch.xcdatamodel; sourceTree = "<group>"; };
 		F80A10D4227B563600E7A1FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -84,6 +86,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		841D1AE9227C1B3C006C7CEE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F80A1100227B5E5200E7A1FB /* HomeBottomStackView.swift */,
+				F80A1103227B63BA00E7A1FB /* HomeTopStackView.swift */,
+				F80A1105227B6A5200E7A1FB /* CardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		841D1AEA227C1B52006C7CEE /* application */ = {
+			isa = PBXGroup;
+			children = (
+				F80A10CE227B563400E7A1FB /* Main.storyboard */,
+				F80A10CA227B563400E7A1FB /* AppDelegate.swift */,
+				F80A10D4227B563600E7A1FB /* Assets.xcassets */,
+				F80A10D6227B563600E7A1FB /* LaunchScreen.storyboard */,
+				F80A10D1227B563400E7A1FB /* findMatch.xcdatamodeld */,
+			);
+			path = application;
+			sourceTree = "<group>";
+		};
+		841D1AEB227C1B6D006C7CEE /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F80A10FB227B587A00E7A1FB /* Extensions+UIView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		841D1AEC227C1B74006C7CEE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F80A10CC227B563400E7A1FB /* HomeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		841D1AED227C1B85006C7CEE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				841D1AEE227C1B98006C7CEE /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F80A10BE227B563400E7A1FB = {
 			isa = PBXGroup;
 			children = (
@@ -107,17 +155,12 @@
 		F80A10C9227B563400E7A1FB /* findMatch */ = {
 			isa = PBXGroup;
 			children = (
-				F80A10CE227B563400E7A1FB /* Main.storyboard */,
-				F80A10CA227B563400E7A1FB /* AppDelegate.swift */,
-				F80A10D4227B563600E7A1FB /* Assets.xcassets */,
-				F80A10D6227B563600E7A1FB /* LaunchScreen.storyboard */,
 				F80A10D9227B563600E7A1FB /* Info.plist */,
-				F80A10D1227B563400E7A1FB /* findMatch.xcdatamodeld */,
-				F80A10FB227B587A00E7A1FB /* Extensions+UIView.swift */,
-				F80A10CC227B563400E7A1FB /* ViewController.swift */,
-				F80A1100227B5E5200E7A1FB /* HomeBottomStackView.swift */,
-				F80A1103227B63BA00E7A1FB /* HomeTopStackView.swift */,
-				F80A1105227B6A5200E7A1FB /* CardView.swift */,
+				841D1AEA227C1B52006C7CEE /* application */,
+				841D1AED227C1B85006C7CEE /* Model */,
+				841D1AEB227C1B6D006C7CEE /* Extension */,
+				841D1AE9227C1B3C006C7CEE /* Views */,
+				841D1AEC227C1B74006C7CEE /* Controller */,
 			);
 			path = findMatch;
 			sourceTree = "<group>";
@@ -274,7 +317,8 @@
 				F80A1106227B6A5200E7A1FB /* CardView.swift in Sources */,
 				F80A1104227B63BA00E7A1FB /* HomeTopStackView.swift in Sources */,
 				F80A1101227B5E5200E7A1FB /* HomeBottomStackView.swift in Sources */,
-				F80A10CD227B563400E7A1FB /* ViewController.swift in Sources */,
+				F80A10CD227B563400E7A1FB /* HomeViewController.swift in Sources */,
+				841D1AEF227C1B98006C7CEE /* User.swift in Sources */,
 				F80A10CB227B563400E7A1FB /* AppDelegate.swift in Sources */,
 				F80A10FC227B587A00E7A1FB /* Extensions+UIView.swift in Sources */,
 				F80A10D3227B563400E7A1FB /* findMatch.xcdatamodeld in Sources */,
