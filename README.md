@@ -1,6 +1,4 @@
 # findMatch
- 
-Creating a fun and interactive Swipe and Match user interface. 
 
 In today's day and age of dating applications, you're almost guaranteed to find this style of interaction.
 
